@@ -1,7 +1,6 @@
 import EntryCard from '@/components/EntryCard'
 import NewEntryCard from '@/components/NewEntryCard'
 import Question from '@/components/Question'
-import { analyze } from '@/utils/ai'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import Link from 'next/link'
@@ -12,16 +11,13 @@ const getEntries = async () => {
         where: {
             userId: user.id as string,
         },
+        include: {
+            analysis: true,
+        },
         orderBy: {
             createdAt: 'desc',
         },
     })
-
-    console.log(
-        await analyze(
-            `Today i am waiting for a reply from my recruiter i feel like i might be getting ghosted again because i have a bad portfolio`
-        )
-    )
 
     return entries
 }

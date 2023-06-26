@@ -1,11 +1,11 @@
 import { OpenAI } from 'langchain/llms/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
+import z from 'zod'
 import { PromptTemplate } from 'langchain/prompts'
 import { Document } from 'langchain/document'
 import { loadQARefineChain } from 'langchain/chains'
-import { OpenAIEmbeddings } from 'langchain/embeddings'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
-import z from 'zod'
 
 const parser = StructuredOutputParser.fromZodSchema(
     z.object({
@@ -55,7 +55,6 @@ export const analyze = async (content) => {
         console.log(e)
     }
 }
-
 export const qa = async (question, entries) => {
     const docs = entries.map((entry) => {
         return new Document({
@@ -63,6 +62,7 @@ export const qa = async (question, entries) => {
             metadata: { id: entry.id, createdAt: entry.createdAt },
         })
     })
+
     const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
     const chain = loadQARefineChain(model)
     const embeddings = new OpenAIEmbeddings()

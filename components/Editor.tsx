@@ -33,6 +33,7 @@ const Editor = ({ entry }) => {
                     className="w-full h-full p-8 text-xl"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    onClick={(e) => setValue('')}
                 />
             </div>
             <div className="border-l border-black/10 col-span-1">
