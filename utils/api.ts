@@ -22,8 +22,10 @@ export const updateEntry = async (id, content) => {
             body: JSON.stringify({ content }),
         })
     )
+
     if (res.ok) {
         const data = await res.json()
+        console.log(data)
         return data.data
     }
 }
