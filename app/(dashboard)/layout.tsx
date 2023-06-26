@@ -4,7 +4,7 @@ const links = [{ href: '/journal', label: 'My Journals' }]
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="h-screen w-screen relative">
+        <div className="h-screen w-screen">
             <aside className="absolute w-[200px] top-0 left-0 h-full border-r border-black/10">
                 <div className="text-xl font-bold p-5">Mood Journal</div>
                 <ul>
